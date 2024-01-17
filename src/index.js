@@ -25,24 +25,37 @@ function Main() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {pizzaData.map((pizza, index) => (
-        <Menu data={pizza} key={index} />
-      ))}
+      <div>
+        {pizzaData.length > 0 &&
+          pizzaData.map((pizza, index) => <Menu {...pizza} key={index} />)}
+      </div>
     </main>
   );
 }
 
 function Footer() {
-  return <footer className="footer">Footer</footer>;
+  return (
+    <footer className="footer">
+      <div className="order">
+        <p>We are open 24 x 7. Hit the button below to place an order.</p>
+        <button className="btn">Order</button>
+      </div>
+    </footer>
+  );
 }
 
-function Menu({ data }) {
+function Menu({ photoName, name, ingredients, price }) {
   return (
-    <>
-      <img src="pizzas/margherita.jpg" alt="pizza" />
-      <h3>{data.name}</h3>
-      <p>{data.ingredients}</p>
-    </>
+    <li className="pizza">
+      <img
+        src={photoName}
+        alt={name}
+        style={{ maxWidth: "100%", height: "auto" }}
+      />
+      <h3>{name}</h3>
+      <p>{ingredients}</p>
+      <span>{"$" + price}</span>
+    </li>
   );
 }
 
