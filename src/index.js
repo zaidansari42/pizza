@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import pizzaData from "./data";
 import "./index.css";
+import pizzaImage from "./pizzas/focaccia.jpg";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function Main() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <div>
+      <div className="pizzas">
         {pizzaData.length > 0 &&
           pizzaData.map((pizza, index) => <Menu {...pizza} key={index} />)}
       </div>
@@ -44,18 +45,20 @@ function Footer() {
   );
 }
 
-function Menu({ photoName, name, ingredients, price }) {
+function Menu({ name, ingredients, price, soldOut }) {
   return (
-    <li className="pizza">
+    <div className={`pizza ${soldOut ? "sold-out" : ""}`}>
       <img
-        src={photoName}
+        src={pizzaImage}
         alt={name}
         style={{ maxWidth: "100%", height: "auto" }}
       />
-      <h3>{name}</h3>
-      <p>{ingredients}</p>
-      <span>{"$" + price}</span>
-    </li>
+      <div>
+        <h3>{name}</h3>
+        <p>{ingredients}</p>
+        <span>{soldOut ? "SOLD OUT" : "$" + price}</span>
+      </div>
+    </div>
   );
 }
 
